@@ -11,12 +11,12 @@ while (opcao !=5) {
     console.log("5 - Sair e Gerar Relatorio Final");
 
     opcao = Number(prompt("Escolha uma opcao: "));
-}
+
 if (opcao === 1){
     console.log("---- CADASTRAR PEDIDO ----");
 
     let codigo = prompt(("Código do Pedido ex:(PED001): "));
-    let produto = prompt(("Nome do produto: "));
+    let produto = prompt("Nome do produto: ");
     let quantidade = Number(prompt("Quantidade: "));
     let setor = prompt("Setor (Montagem/Solda/Pintura): ");
     let prazo = Number(prompt("Prazo em dias: "));
@@ -27,7 +27,7 @@ if (opcao === 1){
         prioridade = "Alta"
     } else if (prazo <= 9){
         prioridade = "Média"
-    } else (prazo >= 10)
+    } else 
         prioridade = "Baixa"
     pedidos.push({
         codigo: codigo,
@@ -48,7 +48,7 @@ else if (opcao === 2){
     } else {
         for (let i = 0; i < pedidos.length; i++){
         let p = pedidos[i];
-        console.log((i) = ". " + p.codigo + " | " + p.produto + " | Qtde: " + p.quantidade + " | " + p.setor + " | Prazo: " + p.prazo + " dias | " + p.prioridade);
+        console.log((i + 1) + ". " + p.codigo + " | " + p.produto + " | Qtde: " + p.quantidade + " | " + p.setor + " | Prazo: " + p.prazo + " dias | " + p.prioridade);
         }
     }
 }
@@ -63,7 +63,7 @@ else if (opcao === 3){
         let medias = 0;
         let baixas = 0;
         for (let i = 0; i < pedidos.length; i++){
-            totalItens = totalItens + pedidos[i].quantidade;
+            totalItens += pedidos[i].quantidade;
         
             if (pedidos[i].prioridade === "Urgente"){
                 urgentes++;
@@ -76,6 +76,35 @@ else if (opcao === 3){
             }
         }
         console.log("Pedidos: " + pedidos.length + " | Total Itens: " + totalItens);
-        console.log("Urgentes: " + urgentes + " | Altas: " + altas + " | Médias: " + medias + " | Baixas: ")
+        console.log("Urgentes: " + urgentes + " | Altas: " + altas + " | Médias: " + medias + " | Baixas: " + baixas);
+    }
+} else if (opcao === 4) {
+    console.log("---- CONSOLE DE LISTAGEM OPERACIONAL ----");
+
+    if (pedidos.length === 0) {
+        console.log("NENHUM PEDIDO ENCONTRADO - Sistema vazio");
+    } else {
+        console.log("Codigo | Produto | Quantidade | Setor | Prazo | Prioridade");
+        console.log("--------------------------------------------------------");
+        for (let i = 0; i < pedidos.length; i++) {
+            let p = pedidos[i];
+            console.log(p.codigo + " | " + p.produto + " | " + p.quantidade +
+                    " | " + p.setor + " | " + p.prazo + " dias | " + p.prioridade);
+        }
+    }
+} else if (opcao === 5) {
+        console.log("---- RELATORIO FINAL ----")
+        if (pedidos.length === 0) {
+            console.log("Nenhum pedido foi registrado.");
+        } else {
+            let totalItens = 0;
+            for (let i = 0; i < pedidos.length; i++) totalItens += pedidos[i].quantidade;
+            console.log("Total de pedidos: " + pedidos.length);
+            console.log("Total de itens: " + totalItens);
+            console.log("-------------------------")
+        }
+        console.log("Encerrando o sistema. Obrigado!");
+    } else {
+        console.log("Opção digitada inválida. Tente novamente por favor!");
     }
 }
